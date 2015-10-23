@@ -35,4 +35,21 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+	'github' => [
+		'client_id' => env('GH_ID'),
+		'client_secret' => env('GH_SECRET'),
+		'redirect' => env('GH_CB_URL'),
+	],
+
+	'facebook' => [
+		'client_id' => env('FB_ID'),
+		'client_secret' => env('FB_SECRET'),
+		'redirect' => env('FB_CB_URL'),
+	],
+
+	'twitter' => [
+		'client_id' => env('TW_ID'),
+		'client_secret' => env('TW_SECRET'),
+		'redirect' => env('TW_CB_URL'),
+	]
 ];
