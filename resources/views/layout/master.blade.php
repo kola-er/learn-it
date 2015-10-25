@@ -15,11 +15,15 @@
     </ul>
     <nav>
         <div class="nav-wrapper ">
-            <a href="#" class="brand-logo">Learnit</a>
+            <a href="/" class="brand-logo">Learnit</a>
             <ul class="right">
+                @if (! Auth::check())
                 <li><a href="register" >Signup</a></li>
                 <li><a href="login" >Login</a></li>
+                @endif
+                @if (Auth::check())
                 <li><a class="dropdown-button" href="#!" data-activates="nav-drop"><i class="material-icons right">arrow_drop_down</i></a></li>
+                @endif
             </ul>
         </div>
     </nav>

@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-<p>Hello</p>
+{{ md5('1234567890') }}
 @endsection

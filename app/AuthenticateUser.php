@@ -7,7 +7,7 @@
  */
 
 namespace Learn;
-use Session;
+
 use Illuminate\Contracts\Http;
 use Laravel\Socialite\Contracts\Factory as Socialite;
 use Learn\Repositories\UserRepository;
@@ -26,16 +26,13 @@ class AuthenticateUser {
 	}
 
 	public function execute($request, $provider, $redirect) {
+
 		if (! ($request->has('code') || $request->has('oauth_token'))) {
 			return $this->getAuthorizationFirst($provider);
 		}
 
 		$user = $this->user->findUserOrCreate($this->getSocialUser($provider));
-		$this->auth->login($user['user'], true);
-
-		if ($user['status'] == 'new') {
-			return redirect('initial-password');
-		}
+		$this->auth->login($user, true);
 
 		return redirect($redirect);
 	}
