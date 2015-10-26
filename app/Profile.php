@@ -25,6 +25,9 @@ class Profile extends Model
 
 	protected $fillable = ['user_id', 'first_name', 'last_name', 'avatar'];
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function user() {
 		return $this->belongsTo('\Learn\User');
 	}

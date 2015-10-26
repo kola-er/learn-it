@@ -17,8 +17,8 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="email" name="email" type="text" value="{{ old('email') }}" class="validate">
-                    <label for="email">Email</label>
+                    <input id="email" name="email" type="text">
+                    <label for="email">Username/Email</label>
                 </div>
             </div>
             <div class="row">
@@ -41,11 +41,16 @@
 
         <div class="row">
             <div class="col s12 m6 l4 offset-l8">
+
+
+
                 <div class="col s4 left">
                     <a href="{{ url('login/facebook') }}"><img class="z-depth-2" height="50" width="50" src="icon/facebook.svg" /></a>
                 </div>
                 <div class="col s4 center">
-                    <a href="{{ url('login/twitter') }}"><img class="z-depth-2" height="50" width="50" src="icon/twitter.svg" /></a>
+                    <a href="{{ url('login/twitter') }}"><span class="fa-stack">
+                        <i class="fa fa-twitter"></i>
+                    </span></a>
                 </div>
                 <div class="col right">
                     <a href="{{ url('login/github') }}"><img class="z-depth-2" height="50" width="50" src="icon/github.svg" /></a>

@@ -23,10 +23,16 @@ class Video extends Model
 	 */
 	protected $table = 'videos';
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function user() {
 		return $this->belongsTo('\Learn\User');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function category() {
 		return $this->belongsTo('\Learn\Category');
 	}

@@ -5,3 +5,7 @@ nav {
 nav .brand-logo {
     padding: 0 0 0 15px
 }
+
+.pad {
+    padding-top: 12px;
+}

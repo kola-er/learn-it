@@ -38,7 +38,7 @@
                 </div>
             </div>
             <button class="btn waves-effect waves-light right" type="submit" name="signup">
-                    Signup
+                Signup
             </button>
         </form>
     </div>

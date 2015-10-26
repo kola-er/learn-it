@@ -23,6 +23,9 @@ class Category extends Model
 	 */
 	protected $table = 'categories';
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function videos() {
 		return $this->hasMany('\Learn\Video');
 	}

@@ -1,13 +1,17 @@
 <?php
 namespace Learn\Repositories;
 
-use Learn\Profile;
 use Learn\User;
-use Datetime;
+use Learn\Profile;
 
 class UserRepository
 {
-
+	/**
+	 * Handle a social registration/login request to the application
+	 *
+	 * @param $userData Collection of a user's info received from a social provider
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|User
+	 */
 	public function findUserOrCreate($userData) {
 		if (! is_null($userData->email)) {
 			$email = $userData->email;
@@ -41,5 +45,31 @@ class UserRepository
 		]);
 
 		return $user;
+	}
+
+	/**
+	 * Get user's avatar on gravatar or set a default one
+	 *
+	 * @param $email
+	 * @return string $gravatar
+	 */
+	public function get_gravatar($email) {
+		$gravatar = 'http://www.gravatar.com/avatar/';
+		$gravatar .= md5( strtolower( trim( $email ) ) );
+		$gravatar .= "?s=80&d=mm&r=g";
+
+		return $gravatar;
+	}
+
+	/**
+	 * Save user's avatar
+	 *
+	 * @param User $user
+	 */
+	public function setUserAvatar(User $user) {
+		$userProfile = new Profile;
+		$userProfile->user_id = $user->id;
+		$userProfile->avatar = $this->get_gravatar($user->email);
+		$userProfile->save();
 	}
 }
