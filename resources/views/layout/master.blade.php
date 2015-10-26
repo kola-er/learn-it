@@ -3,16 +3,20 @@
 <head>
     <title>Learnit | @yield('title')</title>
 
+
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{!! asset('css/font-awesome.min.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! asset('css/materialize.min.css') !!}" rel="stylesheet" type="text/css">
+    <link href="{!! secure_asset('css/materialize.min.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! asset('css/custom.css') !!}" rel="stylesheet" type="text/css">
+    <link href="{!! secure_asset('css/custom.css') !!}" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-<header>
+{{--<header>--}}
     <ul id="nav-drop" class="dropdown-content">
+        <li><a href="dashboard">Home</a></li>
+        <li class="divider"></li>
         <li><a href="logout">Logout</a></li>
     </ul>
     <nav>
@@ -31,7 +35,7 @@
             </ul>
         </div>
     </nav>
-</header>
+{{--</header>--}}
 
 @yield('content')
 
@@ -47,6 +51,7 @@
         $("#video_form_toggle").click(function () {
             $("#video_form").show();
             $("#video_form_toggle").hide();
+            $("#videos").hide();
         })
     });
 </script>

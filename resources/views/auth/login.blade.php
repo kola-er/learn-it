@@ -48,9 +48,7 @@
                     <a href="{{ url('login/facebook') }}"><img class="z-depth-2" height="50" width="50" src="icon/facebook.svg" /></a>
                 </div>
                 <div class="col s4 center">
-                    <a href="{{ url('login/twitter') }}"><span class="fa-stack">
-                        <i class="fa fa-twitter"></i>
-                    </span></a>
+                    <a href="{{ url('login/twitter') }}"><img class="z-depth-2" height="50" width="50" src="icon/twitter.svg" /></a>
                 </div>
                 <div class="col right">
                     <a href="{{ url('login/github') }}"><img class="z-depth-2" height="50" width="50" src="icon/github.svg" /></a>

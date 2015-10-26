@@ -24,6 +24,13 @@ class Video extends Model
 	protected $table = 'videos';
 
 	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = ['user_id', 'category_id', 'title', 'description', 'url'];
+
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function user() {
