@@ -105,10 +105,12 @@ class AuthController extends Controller
 		$field = filter_var($request['email'], FILTER_VALIDATE_EMAIL) ? "email" : "username";
 		$user = User::where($field, $request['email'])->first();
 
-		if ($user->password == md5($request['password'])) {
-			$request->has('remember') ? Auth::login($user, true) : Auth::login($user);
+		if (! is_null($user)) {
+			if ($user->password == md5($request['password'])) {
+				$request->has('remember') ? Auth::login($user, true) : Auth::login($user);
 
-			return redirect('dashboard');
+				return redirect('dashboard');
+			}
 		}
 
 		return redirect('login');

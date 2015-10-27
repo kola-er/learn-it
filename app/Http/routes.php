@@ -18,12 +18,12 @@ Route::get('/', 'ViewController@index');
 Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
 
-/**----------Social authentication route----------**/
-Route::get('login/{provider}', 'Auth\AuthController@socialLogin');
-
 /**----------Login route----------**/
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
+
+/**----------Social authentication route----------**/
+Route::get('login/{provider}', 'Auth\AuthController@socialLogin');
 
 /**----------Homepage route----------**/
 Route::get('dashboard', 'ViewController@dashboard')->middleware(['auth.check']);
@@ -37,3 +37,6 @@ Route::post('video-post', 'VideoController@store')->middleware(['auth.check']);
 
 /**----------Logout route----------**/
 Route::get('logout', 'Auth\AuthController@getLogout');
+
+/**----------Category video route----------**/
+Route::get('/{categoryId}', 'ViewController@index');

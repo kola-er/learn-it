@@ -12,25 +12,34 @@ class ViewController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index()
-	{
-		$categories = Category::simplePaginate(8);
-
-		return view('pages.landing', compact(['categories']));
-	}
-
-	/**
-	 * Display a user's dashboard
-	 *
+	 * @param null $categoryId
 	 * @return \Illuminate\View\View
 	 */
-	public function dashboard()
-	{
-		$user = Auth::user();
-		$categories = Category::simplePaginate(8);
+    public function index($categoryId = null)
+    {
+		$categories = Category::all();
 
-		return view('pages.dashboard', compact(['user', 'categories']));
-	}
+        if (is_null($categoryId)) {
+			$videos = Category::first()->videos;
+
+            return view('pages.landing', compact(['categories', 'videos']));
+        }
+
+		$videos = Category::find($categoryId)->videos;
+
+		return view('pages.landing', compact(['categories', 'videos']));
+    }
+
+    /**
+     * Display a user's dashboard
+     *
+     * @return \Illuminate\View\View
+     */
+    public function dashboard()
+    {
+        $user = Auth::user();
+        $categories = Category::simplePaginate(8);
+
+        return view('pages.dashboard', compact(['user', 'categories']));
+    }
 }

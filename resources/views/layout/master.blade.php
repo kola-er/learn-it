@@ -13,14 +13,14 @@
 
 </head>
 <body>
-{{--<header>--}}
+<header>
     <ul id="nav-drop" class="dropdown-content">
         <li><a href="dashboard">Home</a></li>
         <li class="divider"></li>
         <li><a href="logout">Logout</a></li>
     </ul>
     <nav>
-        <div class="nav-wrapper ">
+        <div class="nav-wrapper brown lighten-1">
             <a href="/" class="brand-logo">Learnit</a>
             <ul class="right">
                 @if (! Auth::check())
@@ -35,11 +35,13 @@
             </ul>
         </div>
     </nav>
-{{--</header>--}}
+</header>
 
-@yield('content')
+<main>
+    @yield('content')
+</main>
 
-@include('footer')
+@include('../partials/footer')
 
 <script src="{!! asset('js/jquery.min.js') !!}"></script>
 <script src="{!! asset('js/materialize.min.js') !!}"></script>
@@ -47,6 +49,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#video_form").hide();
+        $("#videoform").hide();
         $(".dropdown-button").dropdown();
         $("#video_form_toggle").click(function () {
             $("#video_form").show();

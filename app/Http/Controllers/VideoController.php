@@ -38,6 +38,12 @@ class VideoController extends Controller
 		return 'Invalid Youtube video link! Go back to <a href="dashboard">dashboard</a>';
     }
 
+	/**
+	 * Validate the existence of a resource video
+	 *
+	 * @param $videoID Youtube ID supplied by those posting
+	 * @return bool
+	 */
     protected function videoExist($videoID)
     {
         $theURL = "http://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=$videoID&format=json";

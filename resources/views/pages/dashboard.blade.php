@@ -13,7 +13,7 @@
                         <img src="{{ $user->profile->avatar }}" />
                         <span class="card-title">{{isset($user->username) ? : $user->profile->first_name }}</span>
                     </div>
-                    <div class="card-action blue-grey lighten-3">
+                    <div class="card-action brown lighten-2">
                         <a class="black-text" href="update-profile">Edit Profile</a>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <h5>Submit a Youtube link to the video</h5>
                         <div class="col s12">
                             <div class="input-field">
-                                <input type="text" name="title" id="title" placeholder="Title">
+                                <input type="text" name="title" required id="title" placeholder="Title">
                             </div>
                         </div>
                         <div class="col s12">
@@ -38,14 +38,14 @@
                                 <textarea class="materialize-textarea" placeholder="Description" name="description" id="description"></textarea>
                             </div>
                         </div>
-                        <div class="col s6">
+                        <div class="col s8">
                             <div class="input-field">
-                                <input type="text" name="url" id="url" placeholder="Video URL">
+                                <input type="url" name="url" required id="url" placeholder="Video URL" class="validate">
                             </div>
                         </div>
-                        <div class="col s6">
-                            <div class="input-field">
-                                <select name="category" id="category" class="browser-default">
+                        <div class="col s4">
+                            <div class="input-field brown lighten-2">
+                                <select name="category" required id="category" class="browser-default">
                                     <option value="" selected>Select appropriate category</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="col s12">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Post
+                            <button class="btn waves-effect waves-light brown lighten-2" type="submit" name="action">Post
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -70,11 +70,11 @@
                                 <div class="video-container">
                                     <iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $video->url }}" frameborder="0" allowfullscreen></iframe>
                                 </div>
-                                <div class="card-content blue-grey lighten-3">
-                                    <span class="card-title activator grey-text text-darken-4">{{ $video->title }}<i class="material-icons right">more_vert</i></span>
+                                <div class="card-content brown lighten-2">
+                                    <span class="card-title activator">{{ $video->title }}<i class="material-icons right">more_vert</i></span>
                                 </div>
-                                <div class="card-reveal blue-grey lighten-3">
-                                    <span class="card-title grey-text text-darken-4">{{ $video->title }}<i class="material-icons right">close</i></span>
+                                <div class="card-reveal brown lighten-2">
+                                    <span class="card-title">{{ $video->title }}<i class="material-icons right">close</i></span>
                                     <p>Category: {{ $video->category->name }}</p>
                                     <p>Description: {{ $video->description }}</p>
                                 </div>
