@@ -31,8 +31,13 @@ Route::get('dashboard', 'ViewController@dashboard')->middleware(['auth.check']);
 /**----------Profile update route----------**/
 Route::post('update-profile', 'ProfileController@updateProfile');
 
+/**----------Avatar update route----------**/
+Route::post('update-avatar', 'ProfileController@updateAvatar');
+
 /**----------Video post route--------------**/
 Route::post('video-post', 'VideoController@store')->middleware(['auth.check']);
+
+Route::get('video/{videoId}', 'VideoController@display');
 
 /**----------Logout route----------**/
 Route::get('logout', 'Auth\AuthController@getLogout');

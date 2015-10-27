@@ -16,11 +16,6 @@ body {
     flex-direction: column;
     font-weight: lighter;
     color: #000000;
-    background-image: url("../images/learn1");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 20%;
-    background-size: 50%;
 }
 
 form {
@@ -38,11 +33,11 @@ main {
 }
 
 #login-form {
-    padding-top: 10%;
+    padding-top: 7%;
 }
 
 #registration-form {
-    padding-top: 5%;
+    padding-top: 3%;
 }
 
 #fa-color {

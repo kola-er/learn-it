@@ -39,6 +39,18 @@ class VideoController extends Controller
     }
 
 	/**
+	 * Handle display of a single video
+	 *
+	 * @param $videoId
+	 * @return \Illuminate\View\View
+	 */
+	public function display($videoId) {
+		$video = Video::find($videoId);
+
+		return view('pages.single-video', compact(['video']));
+	}
+
+	/**
 	 * Validate the existence of a resource video
 	 *
 	 * @param $videoID Youtube ID supplied by those posting

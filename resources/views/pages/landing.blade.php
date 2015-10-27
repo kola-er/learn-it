@@ -19,20 +19,13 @@
             @if (count($videos))
             <div id="video_collection" class="col s12 m8 l9">
             @foreach($videos as $video)
-            <div class="col s12 m4 l3">
+            <div class="col s12 m4 l6 hide-long-text">
                 <div class="card">
-                    <div class="video-container">
-                        <iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $video->url }}" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="card-content brown lighten-2">
-                        <span class="card-title activator">{{ $video->title }}<i class="material-icons right">more_vert</i></span>
-                    </div>
-                    <div class="card-reveal brown lighten-2">
-                        <span class="card-title">{{ $video->title }}<i class="material-icons right">close</i></span>
-                        <p>Category: {{ $video->category->name }}</p>
-                        <p>Description: {{ $video->description }}</p>
-                    </div>
+                        <a href="video/{{ $video->id }}" >
+                            <img src="https://img.youtube.com/vi/{{ $video->url }}/hqdefault.jpg" width="640" height="360"/>
+                        </a>
                 </div>
+                <span><p style="text-align: center;font-weight: bold;">{{ $video->description }}</p></span>
             </div>
             @endforeach
             </div>

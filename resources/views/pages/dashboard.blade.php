@@ -27,6 +27,7 @@
                 <div class="col s12 m4 l4">
                     <div id="avatar_change" class="card-panel grey lighten-2">
                         <form method="POST" action="update-avatar" enctype="multipart/form-data">
+                            {!! csrf_field() !!}
                             <div class="row">
                                 <div class="file-field input-field" id="image">
                                     <input type="file" name="file" id="file">
@@ -34,6 +35,7 @@
                                 <div class="waves-effect waves-block waves-light" id="imagePreview">
                                     <img src="{{ $user->profile->avatar }}" height="100" width="85" id="profile-pic">
                                 </div>
+                                <p>Click on the image to upload</p>
                             </div>
                             <div class="row">
                                 <a id="avatar_cancel" class="waves-effect waves-teal btn">Cancel</a>
@@ -54,32 +56,26 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="username" name="username" type="text" value="{{ old('username') }}">
+                                <input id="username" name="username" type="text" value="{{ $user->username }}">
                                 <label for="username">Username</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="first_name" name="first_name" type="text" value="{{ old('first_name') }}">
+                                <input id="first_name" name="first_name" type="text" value="{{ $user->profile->first_name }}">
                                 <label for="first_name">First name</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="last_name" name="last_name" type="text" value="{{ old('last_name') }}">
+                                <input id="last_name" name="last_name" type="text" value="{{ $user->profile->last_name }}">
                                 <label for="last_name">Last name</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="email" name="email" type="email" value="{{ old('email') }}" class="validate">
+                                <input id="email" name="email" type="email" value="{{ $user->email }}" class="validate">
                                 <label for="email">Email</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="password" type="password" name="password" required class="validate">
-                                <label for="password">Password</label>
                             </div>
                         </div>
                         <div class="row">

@@ -6,11 +6,13 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{!! asset('css/bootstrap-responsive.css') !!}" rel="stylesheet" type="text/css">
+    <link href="{!! secure_asset('css/bootstrap-responsive.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! asset('css/font-awesome.min.css') !!}" rel="stylesheet" type="text/css">
+    <link href="{!! secure_asset('css/font-awesome.min.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! asset('css/materialize.min.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! secure_asset('css/materialize.min.css') !!}" rel="stylesheet" type="text/css">
-    <link href="{!! asset('css/custom.css') !!}" rel="stylesheet" type="text/css">
-    <link href="{!! secure_asset('css/custom.css') !!}" rel="stylesheet" type="text/css">
+    <link href="{!! asset('css/learn.css') !!}" rel="stylesheet" type="text/css">
+    <link href="{!! secure_asset('css/learn.css') !!}" rel="stylesheet" type="text/css">
 
 </head>
 <body>
