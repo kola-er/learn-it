@@ -29,7 +29,6 @@ Route::get('login/{provider}', 'Auth\AuthController@socialLogin');
 Route::get('dashboard', 'ViewController@dashboard')->middleware(['auth.check']);
 
 /**----------Profile update route----------**/
-Route::get('update-profile', 'ProfileController@editProfile')->middleware(['auth.check']);
 Route::post('update-profile', 'ProfileController@updateProfile');
 
 /**----------Video post route--------------**/

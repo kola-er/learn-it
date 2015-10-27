@@ -1,5 +1,9 @@
 nav .brand-logo {
-    padding: 0 0 0 15px
+    padding: 0 0 0 15px;
+}
+
+nav {
+    background-color: #606467;
 }
 
 .pad {
@@ -10,10 +14,37 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-image: url("../images/sativa.png");
     font-weight: lighter;
+    color: #000000;
+    background-image: url("../images/learn1");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 20%;
+    background-size: 50%;
+}
+
+form {
+    color: #000000;
 }
 
 main {
     flex: 1 0 auto;
+}
+
+#empty-category {
+    padding-top: 25%;
+    color: #000000;
+    font-size: large;
+}
+
+#login-form {
+    padding-top: 10%;
+}
+
+#registration-form {
+    padding-top: 5%;
+}
+
+#fa-color {
+    color: #606467;
 }

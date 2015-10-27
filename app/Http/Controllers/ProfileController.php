@@ -30,13 +30,4 @@ class ProfileController extends Controller
 
 		return redirect('dashboard');
 	}
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function editProfile() {
-		$user = Auth::user();
-
-		return view('pages.profile', compact(['user']));
-	}
 }

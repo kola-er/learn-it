@@ -16,7 +16,7 @@
                 </ul>
             </div>
 
-            @if (! empty($videos))
+            @if (count($videos))
             <div id="video_collection" class="col s12 m8 l9">
             @foreach($videos as $video)
             <div class="col s12 m4 l3">
@@ -25,7 +25,7 @@
                         <iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $video->url }}" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="card-content brown lighten-2">
-                        <span class="card-title activator grey-text text-darken-4">{{ $video->title }}<i class="material-icons right">more_vert</i></span>
+                        <span class="card-title activator">{{ $video->title }}<i class="material-icons right">more_vert</i></span>
                     </div>
                     <div class="card-reveal brown lighten-2">
                         <span class="card-title">{{ $video->title }}<i class="material-icons right">close</i></span>
@@ -36,11 +36,11 @@
             </div>
             @endforeach
             </div>
-            @elseif(empty($videos))
+            @else
                 <div class="col s12 m8 l9">
-                    {{--<div class="col s12 m4 l4 offset-l1">--}}
-                        <h3>Empty Catgory</h3>
-                    {{--</div>--}}
+                    <div id="empty-category" class="col s12 m4 l4 offset-l4">
+                        <p>Empty Category</p>
+                    </div>
                 </div>
             @endif
 
