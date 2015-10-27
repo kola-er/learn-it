@@ -18,17 +18,17 @@
 <body>
 <header>
     <ul id="nav-drop" class="dropdown-content">
-        <li><a href="dashboard">Home</a></li>
+        <li><a href="/dashboard">Home</a></li>
         <li class="divider"></li>
-        <li><a href="logout">Logout</a></li>
+        <li><a href="/logout">Logout</a></li>
     </ul>
     <nav>
         <div id="fa-color" class="nav-wrapper">
             <a href="/" class="brand-logo">Learnit</a>
             <ul class="right">
                 @if (! Auth::check())
-                    <li><a href="register" >Signup</a></li>
-                    <li><a href="login" >Login</a></li>
+                    <li><a href="/register" >Signup</a></li>
+                    <li><a href="/login" >Login</a></li>
                 @endif
                 @if (Auth::check())
                     <li>

@@ -38,7 +38,7 @@ class ViewController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        $categories = Category::simplePaginate(8);
+        $categories = Category::all();
 
         return view('pages.dashboard', compact(['user', 'categories']));
     }
