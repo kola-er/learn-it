@@ -10,30 +10,16 @@ class UserRepository
 	 * Handle a social registration/login request to the application
 	 *
 	 * @param $userData Collection of a user's info received from a social provider
-	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|User
+	 * @param $provider
+	 * @return mixed
 	 */
-	public function findUserOrCreate($userData) {
-		if (! is_null($userData->email)) {
-			$email = $userData->email;
-
-			if ($user = User::where('email', $email)->first()) {
-				return $user;
-			}
-
-			$user = $this->createUser('email', $email);
-		} else {
-			$username = $userData->nickname;
-
-			if ($user = User::where('username', $username)->first()) {
-				return $user->password == md5($username) ? $user : redirect('login');
-			}
-
-			$user = $this->createUser('username', $username);
+	public function findUserOrCreate($userData, $provider) {
+		if ($user = User::where($this->selectProviderField($provider), $userData->id)) {
+			return $user;
 		}
 
-		$field = isset($email) ? ['name' => 'email', 'value' => $email] : ['name' => 'username', 'value' => $username];
-
-		$this->createUserProfile($userData, $field['name'], $field['value']);
+		$user = $this->createUser($userData, $provider);
+		$this->createUserProfile($userData, $user->id);
 
 		return $user;
 	}
@@ -71,28 +57,48 @@ class UserRepository
 	 * @param $fieldValue
 	 * @return mixed
 	 */
-	protected function createUser($field, $fieldValue) {
+	protected function createUser($userData, $provider) {
+		$nameFromProvider = isset($userData->nickname) ? $userData->nickname : $userData->name;
+		$username = User::where('username', $nameFromProvider)->first() ? null : $nameFromProvider;
+		$providerField = $this->selectProviderField($provider);
+
 		$user = new User;
-		$user->$field = $fieldValue;
-		$user->password = md5($fieldValue);
+		$user->$providerField = $userData->id;
+		$user->username = $username;
+		$user->email = $userData->email;
 		$user->save();
 
-		return User::where($field, $fieldValue)->first();
+		return User::where($providerField, $userData->id)->first();
 	}
 
 	/**
 	 * Create profile for a new user authenticated through a social provider
 	 *
 	 * @param $userData
-	 * @param $fieldName
-	 * @param $fieldValue
+	 * @param $user_id
 	 */
-	protected function createUserProfile($userData, $fieldName, $fieldValue) {
+	protected function createUserProfile($userData, $user_id) {
 		Profile::create([
-			'user_id' => User::where($fieldName, $fieldValue)->first()->id,
-			'first_name' => isset($userData->user['first_name']) ? $userData->user['first_name'] : null,
-			'last_name' => isset($userData->user['last_name']) ? $userData->user['last_name'] : null,
+			'user_id' => $user_id,
+			'first_name' => isset($userData->user['first_name']) ? $userData->user['first_name'] : NULL,
+			'last_name' => isset($userData->user['last_name']) ? $userData->user['last_name'] : NULL,
 			'avatar' => isset($userData->avatar_original) ? $userData->avatar_original : $userData->avatar
 		]);
+	}
+
+	/**
+	 * Choose appropriate column to store id returned by a social provider
+	 *
+	 * @param $provider Social provider
+	 * @return string Column to store id returned by a social provider
+	 */
+	protected function selectProviderField($provider) {
+		if ($provider == 'facebook') {
+			return 'fb_id';
+		} elseif ($provider == 'twitter') {
+			return 'tw_id';
+		} elseif ($provider == 'github') {
+			return 'gh_id';
+		}
 	}
 }
