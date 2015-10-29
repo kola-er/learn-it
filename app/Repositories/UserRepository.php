@@ -18,47 +18,24 @@ class UserRepository
 
 			if ($user = User::where('email', $email)->first()) {
 				return $user;
-			} else {
-				$user = new User;
-				$user->email = $email;
-				$user->password = md5($userData->id . $email);
-				$user->save();
 			}
+
+			$user = $this->createUser('email', $email);
 		} else {
 			$username = $userData->nickname;
 
 			if ($user = User::where('username', $username)->first()) {
-				return $user->password == md5($userData->id . $username) ? $user : redirect('login');
+				return $user->password == md5($username) ? $user : redirect('login');
 			}
 
-			$user = new User;
-			$user->username = $username;
-			$user->password = md5($userData->id . $username);
-			$user->save();
+			$user = $this->createUser('username', $username);
 		}
 
-		Profile::create([
-			'user_id' => isset($email) ? User::where('email', $email)->first()->id : User::where('username', $username)->first()->id,
-			'first_name' => isset($userData->user['first_name']) ? $userData->user['first_name'] : null,
-			'last_name' => isset($userData->user['last_name']) ? $userData->user['last_name'] : null,
-			'avatar' => isset($userData->avatar_original) ? $userData->avatar_original : $userData->avatar
-		]);
+		$field = isset($email) ? ['name' => 'email', 'value' => $email] : ['name' => 'username', 'value' => $username];
+
+		$this->createUserProfile($userData, $field['name'], $field['value']);
 
 		return $user;
-	}
-
-	/**
-	 * Get user's avatar on gravatar or set a default one
-	 *
-	 * @param $email
-	 * @return string $gravatar
-	 */
-	public function get_gravatar($email) {
-		$gravatar = 'http://www.gravatar.com/avatar/';
-		$gravatar .= md5( strtolower( trim( $email ) ) );
-		$gravatar .= "?s=80&d=mm&r=g";
-
-		return $gravatar;
 	}
 
 	/**
@@ -71,5 +48,51 @@ class UserRepository
 		$userProfile->user_id = $user->id;
 		$userProfile->avatar = $this->get_gravatar($user->email);
 		$userProfile->save();
+	}
+
+	/**
+	 * Get user's avatar on gravatar or set a default one
+	 *
+	 * @param $email
+	 * @return string $gravatar
+	 */
+	protected function get_gravatar($email) {
+		$gravatar = 'http://www.gravatar.com/avatar/';
+		$gravatar .= md5( strtolower( trim( $email ) ) );
+		$gravatar .= "?s=80&d=mm&r=g";
+
+		return $gravatar;
+	}
+
+	/**
+	 * Create a new user authenticated through a social provider
+	 *
+	 * @param $field
+	 * @param $fieldValue
+	 * @return mixed
+	 */
+	protected function createUser($field, $fieldValue) {
+		$user = new User;
+		$user->$field = $fieldValue;
+		$user->password = md5($fieldValue);
+		$user->save();
+
+		return User::where($field, $fieldValue)->first();
+	}
+
+	/**
+	 * Create profile for a new user authenticated through a social provider
+	 *
+	 * @param $userData
+	 * @param $fieldName
+	 * @param $fieldValue
+	 */
+	protected function createUserProfile($userData, $fieldName, $fieldValue) {
+		Profile::create([
+			'user_id' => User::where($fieldName, $fieldValue)->first()->id,
+			'first_name' => isset($userData->user['first_name']) ? $userData->user['first_name'] : null,
+			'last_name' => isset($userData->user['last_name']) ? $userData->user['last_name'] : null,
+			'avatar' => isset($userData->avatar_original) ? $userData->avatar_original : $userData->avatar
+		]);
 	}
 }

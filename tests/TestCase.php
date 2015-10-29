@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -7,7 +9,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://localhost';
+    protected $baseUrl = 'http://learn.app';
 
     /**
      * Creates the application.
@@ -22,4 +24,17 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $app;
     }
+
+	public function setUp()
+	{
+		parent::setUp();
+		$this->prepareForTests();
+	}
+
+	public function prepareForTests()
+	{
+		Config::set('database.default', 'sqlite');
+		Artisan::call('migrate:refresh');
+	}
+
 }

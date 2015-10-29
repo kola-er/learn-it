@@ -17,10 +17,10 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-		$haystacks = ['=', '/'];
+		$needles = ['=', '/'];
 
-		foreach ($haystacks as $haystack) {
-			$videoID = substr($request['url'], strrpos($request['url'], $haystack, -1) + 1);
+		foreach ($needles as $needle) {
+			$videoID = substr($request['url'], strrpos($request['url'], $needle, -1) + 1);
 
 			if ($this->videoExist($videoID)) {
 				Video::create([
