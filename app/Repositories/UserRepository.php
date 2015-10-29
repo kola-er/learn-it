@@ -65,7 +65,7 @@ class UserRepository
 		$user = new User;
 		$user->$providerField = $userData->id;
 		$user->username = is_null(User::where('username', $nameFromProvider)->first()) ? $nameFromProvider : NULL;
-		$user->email = $userData->email;
+		$user->email = ((! is_null($userData->email)) && is_null(User::where('email', $userData->email)->first())) ? $userData->email : NULL;//$userData->email;
 		$user->save();
 
 		return User::where($providerField, $userData->id)->first();
