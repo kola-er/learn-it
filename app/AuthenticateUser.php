@@ -45,6 +45,7 @@ class AuthenticateUser {
 		}
 
 		$user = $this->user->findUserOrCreate($this->getSocialUser($provider), $provider);
+
 		$this->auth->login($user, true);
 
 		return redirect($redirect);

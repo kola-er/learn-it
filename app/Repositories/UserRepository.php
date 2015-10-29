@@ -14,11 +14,12 @@ class UserRepository
 	 * @return mixed
 	 */
 	public function findUserOrCreate($userData, $provider) {
-		if ($user = User::where($this->selectProviderField($provider), $userData->id)) {
+		if ($user = User::where($this->selectProviderField($provider), $userData->id)->first()) {
 			return $user;
 		}
 
 		$user = $this->createUser($userData, $provider);
+
 		$this->createUserProfile($userData, $user->id);
 
 		return $user;
@@ -58,13 +59,12 @@ class UserRepository
 	 * @return mixed
 	 */
 	protected function createUser($userData, $provider) {
-		$nameFromProvider = isset($userData->nickname) ? $userData->nickname : $userData->name;
-		$username = User::where('username', $nameFromProvider)->first() ? null : $nameFromProvider;
+		$nameFromProvider = isset($userData->user['first_name']) ? $userData->user['first_name'] : $userData->nickname;
 		$providerField = $this->selectProviderField($provider);
 
 		$user = new User;
 		$user->$providerField = $userData->id;
-		$user->username = $username;
+		$user->username = is_null(User::where('username', $nameFromProvider)->first()) ? $nameFromProvider : NULL;
 		$user->email = $userData->email;
 		$user->save();
 
