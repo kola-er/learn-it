@@ -15,9 +15,22 @@ matrix:
     - php: 7.0
     - php: hhvm
 
+env:
+  global:
+    - setup=basic
+    - APP_ENV=staging
+    - APP_DEBUG=true
+    - APP_KEY=cxFOO2TOc1Ew9TUvrMS4Bke3vFBlPXqG
+    - DB_CONNECTION=sqlite
+    - CACHE_DRIVER=file
+    - SESSION_DRIVER=file
+    - QUEUE_DRIVER=sync
+
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-source; fi
+  - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-source --prefer-stable; fi
+  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --prefer-lowest --prefer-stable; fi
+  - php artisan migrate --force
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
