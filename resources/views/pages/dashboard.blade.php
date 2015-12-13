@@ -14,7 +14,7 @@
                         <span class="card-title"><i style="cursor:pointer" id="avatar_change_toggle" class="fa fa-pencil-square-o top-right"></i></span>
                     </div>
                     <div class="card-action brown lighten-2">
-                        {{isset($user->username) ? : $user->profile->first_name }}<i style="cursor:pointer" id="update_form_toggle" class="fa fa-pencil-square-o fa-2x right"></i>
+                        {{isset($user->username) ? $user->username : $user->profile->first_name }}<i style="cursor:pointer" id="update_form_toggle" class="fa fa-pencil-square-o fa-2x right"></i>
                     </div>
                 </div>
             </div>
